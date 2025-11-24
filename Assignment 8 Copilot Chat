@@ -1,0 +1,53 @@
+aindiaye07: Write a function that creates a tuple of unique values for “sex”, “smoker”, “day”, “time”, and “size”.
+
+GitHub Copilot: Enable Claude Haiku 4.5 for all clients
+[object Object]
+
+aindiaye07: @GitHubCopilot Enable: "Enable Claude Haiku 4.5 for all clients"
+
+GitHub Copilot: ````python
+import csv
+from typing import Tuple
+
+def get_unique_values(file_path: str) -> Tuple[tuple, tuple, tuple, tuple, tuple]:
+    """
+    Reads a CSV file and returns tuples of unique values for:
+    sex, smoker, day, time, and size columns.
+    
+    Returns:
+        A tuple containing 5 tuples with unique values for each column
+    """
+    sex_set = set()
+    smoker_set = set()
+    day_set = set()
+    time_set = set()
+    size_set = set()
+    
+    with open(file_path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            sex_set.add(row.get('sex', '').strip())
+            smoker_set.add(row.get('smoker', '').strip())
+            day_set.add(row.get('day', '').strip())
+            time_set.add(row.get('time', '').strip())
+            size_set.add(row.get('size', '').strip())
+    
+    return (
+        tuple(sorted(sex_set)),
+        tuple(sorted(smoker_set)),
+        tuple(sorted(day_set)),
+        tuple(sorted(time_set)),
+        tuple(sorted(size_set))
+    )
+
+# Example usage
+if __name__ == '__main__':
+    tips_csv = r'c:\Users\Aissatou Ndiaye\Downloads\tips.csv'
+    sex, smoker, day, time, size = get_unique_values(tips_csv)
+    
+    print(f"Sex: {sex}")
+    print(f"Smoker: {smoker}")
+    print(f"Day: {day}")
+    print(f"Time: {time}")
+    print(f"Size: {size}")
+````
